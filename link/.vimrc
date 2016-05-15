@@ -252,15 +252,19 @@ Plug 'tpope/vim-eunuch'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mhinz/vim-signify'
 Plug 'mattn/emmet-vim'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'chase/vim-ansible-yaml'
 Plug 'wavded/vim-stylus'
 Plug 'klen/python-mode', {'for': 'python'}
 Plug 'terryma/vim-multiple-cursors'
 Plug 'wting/rust.vim', {'for': 'rust'}
+Plug 'captbaritone/molokai'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'fxn/vim-monochrome'
+Plug 'chriskempson/base16-vim'
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
