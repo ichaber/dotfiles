@@ -57,7 +57,6 @@ Scripts in the `/init` subdirectory will be executed. A whole bunch of things wi
 
 #### Both
 * Node.js, npm and nave via the [init/50_node.sh](init/50_node.sh) script
-* Ruby, gems and rbenv via the [init/50_ruby.sh](init/50_ruby.sh) script
 * Vim plugins via the [init/50_vim.sh](init/50_vim.sh) script
 
 ## Hacking my dotfiles
@@ -80,7 +79,7 @@ _Tested in OSX 10.10_
 
 ### Ubuntu Notes
 
-You might want to set up your ubuntu server [like I do it](https://github.com/cowboy/dotfiles/wiki/ubuntu-setup), but then again, you might not.
+You might want to set up your ubuntu server, but then again, you might not.
 
 Either way, you should at least update/upgrade APT with `sudo apt-get -qq update && sudo apt-get -qq dist-upgrade` first.
 
