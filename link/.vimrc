@@ -31,8 +31,6 @@ autocmd vimrc ColorScheme * :hi Visual guibg=#00588A
 autocmd vimrc ColorScheme * :hi link multiple_cursors_cursor Search
 autocmd vimrc ColorScheme * :hi link multiple_cursors_visual Visual
 
-let g:molokai_italic=0
-colorscheme molokai
 set background=dark
 
 " Visual settings

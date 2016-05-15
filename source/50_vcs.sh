@@ -143,8 +143,6 @@ function gstat() {
 
 # OSX-specific Git shortcuts
 if is_osx; then
-  alias gdk='git ksdiff'
-  alias gdkc='gdk --cached'
   function gt() {
     local path repo
     {
