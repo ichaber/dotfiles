@@ -240,6 +240,13 @@ let g:mustache_abbreviations = 1
 " https://github.com/junegunn/vim-plug
 " Reload .vimrc and :PlugInstall to install plugins.
 call plug#begin('~/.vim/plugged')
+" Completion
+Plug 'mattn/emmet-vim', { 'for': 'html' }
+" Syntax
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'tpope/vim-git'
+Plug 'mustache/vim-mustache-handlebars'
+" Vim Plugin
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
@@ -253,14 +260,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mhinz/vim-signify'
-Plug 'mattn/emmet-vim'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'wavded/vim-stylus'
 Plug 'klen/python-mode', {'for': 'python'}
 Plug 'terryma/vim-multiple-cursors'
 Plug 'wting/rust.vim', {'for': 'rust'}
+" Colorschemes
 Plug 'captbaritone/molokai'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'altercation/vim-colors-solarized'
