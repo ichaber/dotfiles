@@ -12,7 +12,7 @@ alias c="tr -d '\n' | pbcopy"
 [[ "$(type -P lesspipe.sh)" ]] && eval "$(lesspipe.sh)"
 
 # Start ScreenSaver. This will lock the screen if locking is enabled.
-alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
+alias sss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
 
 # Create a new Parallels VM from template, replacing the existing one.
 function vm_template() {
@@ -48,23 +48,23 @@ function vm_template() {
 # Export Localization.prefPane text substitution rules.
 function txt_sub_backup() {
   local prefs=~/Library/Preferences/.GlobalPreferences.plist
-  local backup=$DOTFILES/conf/osx/NSUserReplacementItems.plist
-  /usr/libexec/PlistBuddy -x -c "Print NSUserReplacementItems" "$prefs" > "$backup" &&
+  local backup=$DOTFILES/conf/osx/NSUserDictionaryReplacementItems.plist
+  /usr/libexec/PlistBuddy -x -c "Print NSUserDictionaryReplacementItems" "$prefs" > "$backup" &&
   echo "File ~${backup#$HOME} written."
 }
 
 # Import Localization.prefPane text substitution rules.
 function txt_sub_restore() {
   local prefs=~/Library/Preferences/.GlobalPreferences.plist
-  local backup=$DOTFILES/conf/osx/NSUserReplacementItems.plist
+  local backup=$DOTFILES/conf/osx/NSUserDictionaryReplacementItems.plist
   if [[ ! -e "$backup" ]]; then
     echo "Error: file ~${backup#$HOME} does not exist!"
     return 1
   fi
   cmds=(
-    "Delete NSUserReplacementItems"
-    "Add NSUserReplacementItems array"
-    "Merge '$backup' NSUserReplacementItems"
+    "Delete NSUserDictionaryReplacementItems"
+    "Add NSUserDictionaryReplacementItems array"
+    "Merge '$backup' NSUserDictionaryReplacementItems"
   )
   for cmd in "${cmds[@]}"; do /usr/libexec/PlistBuddy -c "$cmd" "$prefs"; done
 }
