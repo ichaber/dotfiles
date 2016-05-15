@@ -39,8 +39,9 @@
   untracked = cyan
 [merge]
   log = true
-[difftool "Kaleidoscope"]
-  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+#  external = threesome
+[difftool "vimdiff"]
+  cmd = vimdiff git \"$LOCAL\" \"$REMOTE\"
 [rerere]
   enabled = 1
 [url "git@github.com:"]
