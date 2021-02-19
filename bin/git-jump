@@ -9,7 +9,7 @@ Usage: $(basename "$0") [command]
 
 Commands:
   next       Jump forward to the next commit in this branch
-  prev       Jump backward to the next commit in this branch
+  prev       Jump backward to the previous commit in this branch
   clean      Remove current unstaged changes/untracked files**
   cleanall   Remove all saved tags, unstaged changes and untracked files**
 
