@@ -8,63 +8,16 @@ export PATH
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 
+#Brew
+alias service="brew services"
+alias services="brew services"
+
+#Apple Plists
+alias unloadAPSD="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist"
+alias loadAPSD="sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.apsd.plist"
+
 # Make 'less' more.
 [[ "$(type -P lesspipe.sh)" ]] && eval "$(lesspipe.sh)"
 
 # Start ScreenSaver. This will lock the screen if locking is enabled.
 alias sss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
-
-# Create a new Parallels VM from template, replacing the existing one.
-function vm_template() {
-  local name="$@"
-  local basename="$(basename "$name" ".zip")"
-  local dest_dir="$HOME/Documents/Parallels"
-  local dest="$dest_dir/$basename"
-  local src_dir="$dest_dir/Templates"
-  local src="$src_dir/$name"
-  if [[ ! "$name" || ! -e "$src" ]]; then
-    echo "You must specify a valid VM template from this list:";
-    shopt -s nullglob
-    for f in "$src_dir"/*.pvm "$src_dir"/*.pvm.zip; do
-      echo " * $(basename "$f")"
-    done
-    shopt -u nullglob
-    return 1
-  fi
-  if [[ -e "$dest" ]]; then
-    echo "Deleting old VM"
-    rm -rf "$dest"
-  fi
-  echo "Restoring VM template"
-  if [[ "$name" == "$basename" ]]; then
-    cp -R "$src" "$dest"
-  else
-    unzip -q "$src" -d "$dest_dir" && rm -rf "$dest_dir/__MACOSX"
-  fi && \
-  echo "Starting VM" && \
-  open -g "$dest"
-}
-
-# Export Localization.prefPane text substitution rules.
-function txt_sub_backup() {
-  local prefs=~/Library/Preferences/.GlobalPreferences.plist
-  local backup=$DOTFILES/conf/osx/NSUserDictionaryReplacementItems.plist
-  /usr/libexec/PlistBuddy -x -c "Print NSUserDictionaryReplacementItems" "$prefs" > "$backup" &&
-  echo "File ~${backup#$HOME} written."
-}
-
-# Import Localization.prefPane text substitution rules.
-function txt_sub_restore() {
-  local prefs=~/Library/Preferences/.GlobalPreferences.plist
-  local backup=$DOTFILES/conf/osx/NSUserDictionaryReplacementItems.plist
-  if [[ ! -e "$backup" ]]; then
-    echo "Error: file ~${backup#$HOME} does not exist!"
-    return 1
-  fi
-  cmds=(
-    "Delete NSUserDictionaryReplacementItems"
-    "Add NSUserDictionaryReplacementItems array"
-    "Merge '$backup' NSUserDictionaryReplacementItems"
-  )
-  for cmd in "${cmds[@]}"; do /usr/libexec/PlistBuddy -c "$cmd" "$prefs"; done
-}

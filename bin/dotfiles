@@ -267,7 +267,7 @@ fi
 # with recent XCode or CLT)
 if [[ ! "$(type -P git)" ]] && is_ubuntu; then
   e_header "Installing Git"
-  sudo apt-get -qq install git-core
+  sudo apt -qq install git-core
 fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!

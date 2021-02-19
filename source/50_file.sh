@@ -20,14 +20,43 @@ else
   alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
 fi
 
-# Easier navigation: .., ..., -
-alias ..='cd ..'
-alias ...='cd ../..'
+#Typos and shortcuts
+alias ll="ls -lah"
+alias lsl="ls -lahFA | less"
+alias l.="ls -d -G .* "
+alias sl="ls" #typo for ls
+alias stat="stat -x"
+alias tailf="tail -f"
+alias cd..="cd .."
+alias ..="cd .."
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias ......='cd ../../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
 alias -- -='cd -'
+alias fhere="find . -name "
+alias findbig="find . -type f -exec ls -s {} \; | sort -n -r | head -5"
+alias df="df -ha"
+alias ps="ps aux"
+alias psg="\ps aux | grep -v grep | grep -i -e VSZ -e" #search ps info for process
+alias mkdir="mkdir -pv"
+alias myip="curl http://ipecho.net/plain; echo" #Get my IP
+alias header="curl -I" #get web server headers
+alias headers="curl -svo /dev/null "
+alias headerc='curl -I --compress' #find out if remote server supports gzip / mod_deflate or not
+alias diff="colordiff"
+alias whereami="pwd"
+alias edit="vim"
+alias h="history"
+alias j="jobs -l"
+alias root="sudo -i"
 
 # File size
 alias fs="stat -f '%z bytes'"
 alias df="df -h"
+alias inodes="du --inodes -xS | sort -h"
 
 # Recursively delete `.DS_Store` files
 alias dsstore="find . -name '*.DS_Store' -type f -ls -delete"
