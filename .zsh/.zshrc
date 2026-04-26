@@ -82,3 +82,5 @@ export PATH="$PATH:/Users/ichaber/.lmstudio/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
 export GPG_TTY=$(tty)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
