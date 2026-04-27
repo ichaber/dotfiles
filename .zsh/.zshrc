@@ -84,3 +84,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export GPG_TTY=$(tty)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+
+#Add television integration
+echo 'eval "$(tv init zsh)"' >> ~/.zshrc
+
+#Worktrunk integration
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
