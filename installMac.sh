@@ -8,7 +8,7 @@ fi
 
 brew update
 brew upgrade
-brew install stow tmux neovim mise eza fzf bat rg fd television lua jq z ncurses worktrunk docker
+brew install stow tmux neovim mise eza fzf bat zoxide rg fd television lua jq z ncurses worktrunk sesh docker
 brew cleanup
 
 mkdir -p ~/.config/tmux/plugins/tpm
