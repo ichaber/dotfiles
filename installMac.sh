@@ -14,7 +14,7 @@ brew cleanup
 mkdir -p ~/.config/tmux/plugins/tpm
 mkdir -p ~/.config/tmux/plugins/catppuccin
 
-if [ "$(ls -A ~/.config/tmux/plugins/tpm)" ]; then
+if [ ! "$(ls -A ~/.config/tmux/plugins/tpm)" ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 fi
 
