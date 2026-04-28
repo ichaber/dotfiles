@@ -6,10 +6,19 @@ then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+APPS="stow tmux neovim mise eza fzf bat zoxide rg fd television lua jq z ncurses worktrunk sesh docker"
+
 brew update
 brew upgrade
-brew install stow tmux neovim mise eza fzf bat zoxide rg fd television lua jq z ncurses worktrunk sesh docker
-brew cleanup
+
+brew list $APPS &>/dev/null
+status=$?
+
+if [ $status -eq 0 ]; then
+  echo "Nothing to install"
+else
+  brew install $APPS 
+fi
 
 mkdir -p ~/.config/tmux/plugins/tpm
 mkdir -p ~/.config/tmux/plugins/catppuccin
