@@ -1,3 +1,4 @@
+#zmodload zsh/zprof #Performance test start
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,22 +6,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+#Allow extended globbing -> https://www.mankier.com/1/zshexpn#Filename_Generation-Globbing_Flags
+setopt extended_glob
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-
-DEFAULT_USER=ichaber
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vm='ssh devvm'
-alias ..='cd ..'
+ZSH_THEME="robbyrussell"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -48,14 +44,29 @@ alias ..='cd ..'
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# OptOut of dotnet telemetry
-DOTNET_CLI_TELEMETRY_OPTOUT=1
-
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+ 
+# Only load NVM when needed. Alternative: zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' autoload yes
+plugins=(
+        #Version Control
+        git 
+        #Tools
+        sudo
+        extract
+        z
+        #Cloud/Infra
+        docker
+        #Lang/Tools
+        dotnet
+        python
+        nvm
+        #Community (should be last)
+        zsh-autosuggestions 
+        zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -63,8 +74,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/opt/homebrew/bin/
 
 #Powerline-Config
-#. /Library/Python/2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 #Functions
 sshsu() { ssh "$@" -t 'sudo su -';}
@@ -72,21 +82,33 @@ sshsu() { ssh "$@" -t 'sudo su -';}
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source /Users/ichaber/.config/broot/launcher/bash/br
+### Customizations for plugins
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#939393,bold,underline"
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/ichaber/.lmstudio/bin"
-# End of LM Studio CLI section
+# This speeds up pasting w/ autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
 
-#Add .locl/bin to the path
-export PATH="$HOME/.local/bin:$PATH"
-
-export GPG_TTY=$(tty)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+# END This speeds up pasting w/ autosuggest
 
 #Add television integration
-echo 'eval "$(tv init zsh)"' >> ~/.zshrc
+#echo 'eval "$(tv init zsh)"' >> ~/.zshrc
 
 #Worktrunk integration
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+### Imports of other scripts (. for fallback needs)
+[[ ! -f ~/.config/.bash_aliases ]] || source ~/.config/.bash_aliases
+[[ ! -f ~/.config/.bash_aliases_machine ]] || source ~/.config/.bash_aliases_machine
+[[ ! -f ~/.config/.bash_export ]] || source ~/.config/.bash_export
+[[ ! -f ~/.config/.bash_aws_extensions ]] || source ~/.config/.bash_aws_extensions
+
+#zprof #Perfomance test end

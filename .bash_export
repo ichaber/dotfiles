@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='vim'
+ fi
+
+# ------- Opt out of .Net telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+# ------- Set SIT nonprod as the default AWS profile
+export AWS_PROFILE="SIT-NONPROD"
+
+
+# ------- Disable proxy
+export NO_PROXY=localhost,google.com,cypress.io
+
+# ------- PATH
+#Kube krew plugin path
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
+export PATH=$HOME/.kubectl-plugins/:$PATH
+
+# ------- Add .NET tools to the path
+export PATH=$PATH:$HOME/.dotnet/tools
+
+# ------- Added by LM Studio CLI (lms)
+export PATH="$PATH:~/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# ------- Add .locl/bin to the path
+export PATH="$HOME/.local/bin:$PATH"
+
+# ------- Export GPG
+export GPG_TTY=$(tty)
+
+# ------- Customize to your needs...
+export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/opt/homebrew/bin/:/opt/homebrew/opt/postgresql@17/bin
+
+# ------- Configure NVM
+#export NVM_DIR="$HOME/.nvm"
+#if [[ "$OSTYPE" == "darwin"* ]]; then
+#  [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+#else
+#  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#  if [ "$BASH_VERSION" ]; then
+#    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#  fi
+#fi
