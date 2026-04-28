@@ -31,16 +31,23 @@ else
   echo "Skip cloning oh-my-zsh"
 fi
 
-if [ ! -d $ZSH_CUSTOM_DIR/plugins/zsh-autosuggestions ]; then
-  git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 
+if [ ! -d $ZSH_CUSTOM_DIR/custom/plugins/zsh-autosuggestions ]; then
+  git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM_DIR:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 
 else
   echo "Skip cloning zsh-autosuggestions"
 fi
 
-if [ ! -d $ZSH_CUSTOM_DIR/plugins/zsh-syntax-highlighting ]; then
-  git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+if [ ! -d $ZSH_CUSTOM_DIR/custom/plugins/zsh-syntax-highlighting ]; then
+  git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM_DIR:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 else
   echo "Skip cloning zsh-syntax-highlighting"
+fi
+
+read -p "Copy .zshenv to set zsh dir (~/.config/zsh) (y/n): " copyenv
+if [ "$copyenv" == "y" ]; then
+  cp .zshenv ~/.
+else
+  echo "Skipping .zshenv copy"
 fi
 
 stow .
