@@ -12,8 +12,8 @@ alias kubectx="kubectl ctx"
 alias kallpods="kubectl get pods --all-namespaces -o jsonpath=\"{.items[*].spec.containers[*].name}\" | tr -s ' ' '\n' |sort |uniq -c"
 alias f="fuck "
 alias fhere="find . -name "
-alias ll="ls -lah "
-alias lsl="ls -lahFA | less"
+alias llo="ls -lah "
+alias lslo="ls -lahFA | less"
 alias sl="ls" #typo for ls
 alias stat="stat -x"
 alias tailf="tail -f"
@@ -38,13 +38,30 @@ alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 
 # ------- Directory listing
-if [[ "$(type -p tree)" ]]; then
+if [[ "$(type -p tree)" != "tree not found" ]]; then
   alias ll='tree --dirsfirst -aLpughDFiC 1'
   alias lsd='ll -d'
-else
+elif [[ "$(type -p eza)" = "eza not found" ]]; then
   alias ll='ls -al'
   alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
 fi
+
+# Replace ls with eza
+# ------- Eza configs
+alias ls='eza'
+# Long format with headers and icons
+alias ll='eza -l --header --icons'
+# Long format including hidden files
+alias la='eza -la --header --icons'
+# Tree view shortcut
+alias tree='eza --tree'
+# Add eza git info
+alias lsg='eza -l --git --icons'
+alias lsgt='lsg --tree --level=2'
+# Hyperlinks for opening in file browser
+alias lo='eza -la --header --icons --hyperlink'
+
+
 
 # ------- File size
 alias df="df -ha"
