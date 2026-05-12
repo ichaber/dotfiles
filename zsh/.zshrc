@@ -51,9 +51,9 @@ plugins=(
         #Version Control
         git 
         #Tools
-        sudo
         extract
         z
+        zsh-vi-mode
         #Cloud/Infra
         docker
         #Lang/Tools
