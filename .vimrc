@@ -58,6 +58,15 @@ autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 autocmd FileType json setlocal expandtab shiftwidth=4 softtabstop=4
 autocmd FileType cs setlocal expandtab shiftwidth=4 softtabstop=4
 autocmd FileType rust setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType sh setlocal expandtab shiftwidth=2 tabstop=2
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Show special characters
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+" Ensure it's not active by default"
+:set nolist
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key maping
