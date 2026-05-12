@@ -41,13 +41,22 @@ else
 fi
 
 if [ ! -d $ZSH_CUSTOM_DIR/custom/plugins/zsh-autosuggestions ]; then
-  git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM_DIR:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 
+  git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions \ 
+    ${ZSH_CUSTOM_DIR:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 
 else
   echo "Skip cloning zsh-autosuggestions"
 fi
 
 if [ ! -d $ZSH_CUSTOM_DIR/custom/plugins/zsh-syntax-highlighting ]; then
-  git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM_DIR:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    ${ZSH_CUSTOM_DIR:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+else
+  echo "Skip cloning zsh-syntax-highlighting"
+fi
+
+if [ ! -d $ZSH_CUSTOM/plugins/zsh-vi-mode ]; then
+  git clone --depth 1 https://github.com/jeffreytse/zsh-vi-mode \
+    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vi-mode
 else
   echo "Skip cloning zsh-syntax-highlighting"
 fi
